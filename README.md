@@ -1,3 +1,5 @@
+![Alt Text](https://i.ibb.co/2jhw6xS/WISAtharva-logos-transparent.png)
+
 # WISAtharva - Your Conversational AI Companion
 
 ## Description
@@ -65,8 +67,8 @@ pip install requests pycryptodome 'curl_cffi>=0.6.2' aiohttp certifi browser_coo
 g4f gui
 ```
 
-This will start the `g4f` program, allowing you to use its GUI.
-```
+### This will start the `g4f` program, allowing you to use its GUI.
+
 
 
 ## About the Team
