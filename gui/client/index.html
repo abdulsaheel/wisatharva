@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-framework="javascript">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WISAtharva - Your Conversational AI Companion for Learning and Challenges">
+    <meta name="keywords" content="conversational AI, chatbot, WISAtharva, learning assistant">
+    <meta name="author" content="Atharva Data Science Community">
+    <meta property="og:title" content="WISAtharva - Your Conversational AI Companion">
+    <meta property="og:description" content="Engage with WISAtharva, your conversational AI companion, for learning, challenges, and fun conversations.">
+    <meta property="og:image" content="https://i.ibb.co/ZhqZBZQ/WISAtharva-svg.png">
+    <meta property="og:url" content="https://chat.atharvadsc.in">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/ZhqZBZQ/WISAtharva-svg.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/ZhqZBZQ/WISAtharva-svg.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.ibb.co/ZhqZBZQ/WISAtharva-svg.png">
+    <link rel="manifest" href="/static/img/site.webmanifest">
+    <script src="/static/js/icons.js"></script>
+    <script src="/static/js/highlightjs-copy.min.js"></script>
+    <script src="/static/js/chat.v1.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
+    <link rel="stylesheet" href="/static/css/dracula.min.css">
+    <script>
+        MathJax = {
+            chtml: {
+                scale: 1,
+                displayAlign: 'left'
+            }
+        };
+    </script>
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mistral-tokenizer-js" async>
+        import mistralTokenizer from "mistral-tokenizer-js"
+    </script>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/belladoreai/llama-tokenizer-js@master/llama-tokenizer.js" async>
+        import llamaTokenizer from "llama-tokenizer-js"
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/gpt-tokenizer/dist/cl100k_base.js" async></script>
+    <script src="/static/js/text_to_speech/index.js" async></script>
+    <!--
+            <script src="/static/js/whisper-web/index.js" async></script>
+    -->
+    <script>
+        const user_image = '<img src="/static/img/user.png" alt="your avatar">';
+        const gpt_image = `<img src="https://i.ibb.co/ZhqZBZQ/WISAtharva-svg.png" alt="your avatar">`;
+    </script>
+    <script src="/static/js/highlight.min.js"></script>
+    <script>window.conversation_id = "{{chat_id}}"</script>
+    <title>WISAtharva</title>
+</head>
+
+<body>
+    <div class="gradient"></div>
+    <div class="row">
+        <div class="box conversations">
+            <div class="attached">
+            <div class="side-by-side">
+                <img src="https://i.ibb.co/2jhw6xS/WISAtharva-logos-transparent.png" alt="">
+                <button class="new_convo" onclick="new_conversation()">
+                    <i class="fa-regular fa-plus"></i>
+                </button>
+            </div>
+            <div class="top">
+                
+            </div>
+            </div>
+
+            <div class="bottom_buttons">
+            
+                <div class="info">
+                    <span class="convo-title"><a href="https://atharvadsc.in" target="_blank">Atharva Data Science Community  </a>
+                    </span>
+                </div>
+                <div class="info">
+                    <i class="fa-brands fa-github"></i>
+                    <span class="convo-title">github ~ <a href="https://github.com/abdulsaheel">@abdulsaheel</a>
+                    </span>
+                </div>
+              
+            </div>
+        </div>
+        <div class="images hidden">
+            
+        </div>
+        <div class="conversation">
+            
+            <div id="messages" class="box"></div>
+            <div class="toolbar">
+                <div id="input-count" class="">
+                    <button class="hide-input">
+                        <i class="fa-solid fa-angles-down"></i>
+                    </button>
+                    <span class="text"></span>
+                </div>
+                <div class="stop_generating stop_generating-hidden">
+                    <button id="cancelButton">
+                        <span>Stop Generating</span>
+                        <i class="fa-regular fa-stop"></i>
+                    </button>
+                </div>
+                <div class="regenerate regenerate-hidden">
+                    <button id="regenerateButton">
+                        <span>Regenerate</span>
+                        <i class="fa-solid fa-rotate"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="user-input">
+                <div class="box input-box">
+                    <textarea id="message-input" placeholder="Ask a question" cols="30" rows="10"
+                        style="white-space: pre-wrap;resize: none;"></textarea>
+                    <div id="send-button">
+                        <i class="fa-solid fa-paper-plane-top"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="mobile-sidebar">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</body>
+</html>

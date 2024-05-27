@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" >
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHITRA - AI Image Generation</title>
+    <style>
+              
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-container {
+        display: flex;
+        position: relative;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        justify-content: space-between;
+        background-color: var(--outgoing-chat-bg);
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        z-index: 1000; /* Adjust the z-index to ensure it's above other content */
+        transition: transform 0.3s ease-in-out;
+        flex-wrap:wrap
+        }
+
+
+        .atharva-logo img {
+            width: 261px; /* Adjust the width as needed */
+            height: 50px; /* Adjust the height as needed */
+        }
+
+        .other-logos {
+            display: flex;
+            align-items: center;
+        }
+
+        .other-logos img {
+            width: 80px;
+            height: 72px;
+            margin-left: 10px;
+        }
+
+        .dropbtn {
+        background-color: #FFA500; /* Orange */
+        color: white;
+        padding: 16px;
+        border-radius: 6px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        }
+
+        /* Define the light orange color */
+        .light-orange {
+        background-color: #FFA500; /* Light Orange */
+        color: #FFF; /* White text color */
+        border: none; /* Remove the button border */
+        padding: 10px 20px; /* Adjust padding for button size */
+        border-radius: 5px; /* Add rounded corners */
+        cursor: pointer; /* Change cursor on hover for interactivity */
+        transition: background-color 0.3s ease; /* Smooth color transition */
+        }
+
+        /* Define a hover effect to slightly darken the color on hover */
+        .light-orange:hover {
+        background-color: #FF8500; /* Slightly darker shade of orange */
+        }
+
+
+        /* Style the dropdown content (hidden by default) */
+        .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f2f2f2; /* Light subtle grey */
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Style the links inside the dropdown */
+        .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+        background-color: #e0e0e0; /* Light grey on hover */
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+        }
+
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #FFA500; /* Dark Orange */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #444; /* Dark Gray */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #FFA500; /* Dark Orange */
+        }
+
+        input[type="text"], select {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+
+        #generate-btn {
+            background-color: #FFA500; /* Dark Orange */
+            color: #333; /* Dark Gray */
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #generate-btn:hover {
+            background-color: #FF4500; /* Darker Orange */
+        }
+
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #FFA500; /* Dark Orange */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        .result-method {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #444; /* Dark Gray */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-method h2 {
+            font-size: 24px;
+            color: #FFA500; /* Dark Orange */
+        }
+
+        .image-container {
+            width: 480px; /* Set your desired fixed width here */
+            margin: 0 auto;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .loading {
+            text-align: center;
+            margin-top: 10px;
+            color: #777;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #333;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* Add these styles to your existing CSS */
+
+/* Style for the NSFW label */
+.nsfw-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 0, 0, 0.7); /* Red with transparency */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1;
+}
+
+/* Style for the "Show" button */
+.show-button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3498db; /* Blue */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* Style for blurred images */
+.image-container img[style*="blur"] {
+    filter: blur(10px); /* You can adjust the blur amount here */
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  .logout-form {
+    display: none;
+}
+  /* Hide Atharva and MREC logos */
+  .other-logos {
+    display: none;
+  }
+
+/* Show the tribar icon */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  z-index: 1;
+  left: 0; /* Change right to left */
+  top: 100%; /* Keep top as it is */
+}
+
+  .dropdown .dropbtn {
+    font-size: 0; /* Hide the text */
+    padding: 0;
+  }
+
+  .dropdown .dropbtn i {
+    font-size: 24px; /* Set the icon size */
+    padding: 3vw;
+
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  /* Account icon */
+  .user-email {
+    display: block;
+    color: white;
+  }
+  .account-details {
+    display: none;
+    background-color: #f9f9f9;
+    position: absolute;
+    min-width: 160px;
+    right: 0;
+    top: 100%;
+  }
+  button, select {
+    text-transform: none;
+    color: white;
+    background: orange;
+    padding: 2vw;
+}
+
+
+/* Style for the label */
+label {
+            font-weight: bold;
+        }
+
+        /* Style for the select (dropdown) element */
+        select {
+            /* Custom border */
+            border: 2px solid #ff6600; /* Orange border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 8px; /* Spacing inside the dropdown */
+            font-size: 16px; /* Font size */
+            width: 200px; /* Set a fixed width or adjust as needed */
+            background-color: #fff; /* Background color */
+            color: #333; /* Text color */
+            cursor: pointer; /* Show pointer cursor on hover */
+        }
+
+        /* Style for dropdown options */
+        option {
+            background-color: #fff; /* Background color for options */
+            color: #333; /* Text color for options */
+        }
+
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 769px) {
+  .other-logos {
+    display: block;
+  }
+  /* Show icons only on mobile view */
+  .dropdown .dropbtn i {
+    display: block;
+  }
+  .account-icon{
+    display: none;
+  }
+
+}
+
+</style>
+
+</head>
+<body>
+    <div class="header-container">
+        <nav>
+          <div class="dropdown">
+            <button class="dropbtn">
+              <i class="fas fa-bars"></i> <!-- Hamburger Icon -->
+            </button>
+            <div class="dropdown-content">
+              <a href="/chat">WISATHARVA</a>
+              <a href="/chitra">CHITRA</a>
+            </div>
+          </div>
+        </nav>
+        <!-- Atharva logo on the left -->
+        <div class="atharva-logo">
+          <img src="https://i.ibb.co/tXwMvd3/CHITRA-logos-transparent.png" alt="Atharva Logo">
+        </div>
+      
+      
+        <div class="account-icon" id="account-icon">
+          <button><i style='font-size:24px' class='fas'>&#xf2f5;</i></button>
+        </div>
+      
+        <div class="other-logos">
+          <a href="https://www.atharvadsc.com" target="_blank"><img
+                  src="https://raw.githubusercontent.com/abdulsaheel/filehosting/main/Untitleddesign.png"
+                  alt="Atharva Logo"></a>
+          <a href="https://www.mrec.ac.in/" target="_blank"><img
+                  src="https://i.ibb.co/mzgRbkZ/MREC-logo-removebg-preview.png" alt="Atharva Logo"></a>
+      </div>
+      </div>
+    <h1>Image Generation</h1>
+    <div class="container">
+        <form method="POST" action="/generate" id="imageForm">
+            <label for="prompt">Prompt:</label>
+            <input type="text" name="prompt" required>
+
+            <label for="negative">Negative Prompt:</label>
+            <input type="text" name="negative">
+
+            <label for="styleDropdown">Select Style:</label>
+            <select id="styleDropdown" name="style">
+                <option value="enhance">Enhance</option>
+                <option value="anime">Anime</option>
+                <option value="photographic">Photographic</option>
+                <option value="digital-art">Digital Art</option>
+                <option value="comic-book">Comic Book</option>
+                <option value="fantasy-art">Fantasy Art</option>
+                <option value="analog-film">Analog Film</option>
+                <option value="neon-punk">Neon Punk</option>
+                <option value="isometric">Isometric</option>
+                <option value="low-poly">Low Poly</option>
+                <option value="origami">Origami</option>
+                <option value="line-art">Line Art</option>
+                <option value="cinematic">Cinematic</option>
+                <option value="3d-model">3D Model</option>
+                <option value="pixel-art">Pixel Art</option>
+                <option value="custom">Custom</option> 
+            </select>
+
+            <div id="custom-style" style="display: none;">
+                <label for="customStyle">Custom Style:</label>
+                <input type="text" name="customStyle">
+            </div>
+
+            <button id="generate-btn" type="submit">Generate</button>
+            <div id="loading">
+                <div id="loading-spinner"></div>
+                Generating...
+            </div>
+        </form>
+
+        <div id="results">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
+    <script
+  src="https://unpkg.com/@tensorflow/tfjs@2.6.0"
+  type="text/javascript"></script>
+<script src="https://unpkg.com/nsfwjs@2.3.0" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nsfwjs@2.1.0/dist/nsfwjs.min.js"></script>
+
+    <script>
+
+
+        $(document).ready(function() {
+                // Load the NSFW model when the page is loaded
+
+            // Show/hide custom style input based on selected option
+            $("#styleDropdown").change(function() {
+                var selectedStyle = $(this).val();
+                if (selectedStyle === "custom") {
+                    $("#custom-style").show();
+                } else {
+                    $("#custom-style").hide();
+                }
+            });
+        
+            $("#imageForm").submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                var generateBtn = $("#generate-btn");
+                var loading = $("#loading");
+                loading.show();
+                generateBtn.hide(); // Hide the button
+        
+                $.ajax({
+                    type: "POST",
+                    url: "/generate_image",
+                    data: formData,
+                    success: function(data) {
+                        console.log(data); // Add this line to inspect the data structure
+                        displayResults(data);
+                        generateBtn.show(); // Show the button after receiving image links
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    },
+                    complete: function() {
+                        loading.hide();
+                    }
+                });
+            });
+        
+        
+            // When displaying results, check and handle NSFW images
+    function displayResults(data) {
+        var resultContainer = $("#results");
+        resultContainer.empty();
+
+        data.forEach(function(item) {
+            var method_name = item.method_name;
+            var links = item.result.links;
+
+            var methodContainer = $("<div class='result-method'></div>");
+
+            // Iterate over image links
+            links.forEach(function(link) {
+                var imgContainer = $("<div class='image-container'></div>");
+                var img = $("<img>");
+                img.attr("src", link);
+
+                imgContainer.append(img);
+
+                // Check if the image is NSFW and handle accordingly
+                if (nsfwModel) {
+                    isImageNSFW(nsfwModel, link)
+                        .then(isNSFW => {
+                            if (isNSFW) {
+                                img.css("filter", "blur(10px)"); // You can adjust the blur amount here
+                                imgContainer.append('<button class="show-button">Reveal NSFW</button>');
+                            }
+                        });
+                }
+
+                methodContainer.append(imgContainer);
+            });
+
+            resultContainer.append(methodContainer);
+        });
+    }
+
+        });
+
+        
+        
+            </script>
+</body>
+</html>
