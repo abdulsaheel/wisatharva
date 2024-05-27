@@ -28,7 +28,6 @@ WISAtharva utilizes G4F Library with custom prompting making it more creative to
 ## Steps to run the code:
 
 
-```markdown
 # Setting up Environment and Installing Dependencies for g4f
 
 This guide provides instructions on setting up a custom Python environment named `myenv`, installing necessary dependencies, and running the `g4f` program.
