@@ -1,4 +1,5 @@
-![Alt Text](https://i.ibb.co/2jhw6xS/WISAtharva-logos-transparent.png)
+[![Alt Text]((https://i.ibb.co/2jhw6xS/WISAtharva-logos-transparent.png))](https://chat.atharvadsc.in)
+
 
 # WISAtharva - Your Conversational AI Companion
 
