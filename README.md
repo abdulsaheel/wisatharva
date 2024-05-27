@@ -1,5 +1,7 @@
-[![Alt Text](https://i.ibb.co/2jhw6xS/WISAtharva-logos-transparent.png)](https://chat.atharvadsc.in)
 
+---
+
+[![Alt Text](https://i.ibb.co/2jhw6xS/WISAtharva-logos-transparent.png)](https://chat.atharvadsc.in)
 
 # WISAtharva - Your Conversational AI Companion
 
@@ -26,7 +28,6 @@ WISAtharva caters to students of all ages and educational levels, from primary s
 WISAtharva utilizes G4F Library with custom prompting making it more creative towards helping and guiding. The project incorporates open-source libraries and frameworks, ensuring scalability, flexibility, and compatibility with a wide range of platforms and devices.
 
 ## Steps to run the code:
-
 
 # Setting up Environment and Installing Dependencies for g4f
 
@@ -69,11 +70,13 @@ g4f gui
 
 ### This will start the `g4f` program, allowing you to use its GUI.
 
-
-
 ## About the Team
 The WISAtharva project is developed and maintained by a dedicated individual, Abdul Sahil, who is passionate about leveraging technology to empower learners and educators worldwide. You can find Abdul Sahil's profile [here](https://github.com/abdulsaheel). 
 
 ## Get Involved
 Join the WISAtharva community and contribute to the future of education and AI-driven learning experiences. Whether you're a developer, educator, student, or enthusiast, there are opportunities to collaborate, provide feedback, and shape the evolution of WISAtharva. We are open for contributions! Please make a pull request or open an issue stating the changes you want or wish to make. Let's work together to redefine the way we learn, teach, and interact with technology for generations to come.
 
+## Special Thanks
+Special thanks to [xtekky](https://github.com/xtekky/gpt4free) for their invaluable contributions to the GPT-4 Free Library, which serves as a fundamental component of the WISAtharva project.
+
+---
